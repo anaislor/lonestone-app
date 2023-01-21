@@ -2,8 +2,8 @@
 
 .view {
   width: 100vw;
-  height: 100vh;
-  padding: 24px;
+  min-height: 100vh;
+  padding: 64px 24px;
   background-color: $background-color;
 }
 

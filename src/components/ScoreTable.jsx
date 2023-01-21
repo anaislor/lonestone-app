@@ -6,8 +6,8 @@ function ScoreTable({ scores }) {
     <table className="view-score-table">
       <tbody className="view-score-table-head">
         <tr>
-          <td colSpan={3}>Joueur</td>
-          <td colSpan={3}>Ordinateur</td>
+          <td colSpan={3} className="view-score-table-head-player">Joueur</td>
+          <td colSpan={3} className="view-score-table-head-computed">Ordinateur</td>
         </tr>
         <tr>
           <td>Score total</td>

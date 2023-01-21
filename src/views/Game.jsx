@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { useMemo } from "react";
 import { useState } from "react";
+import ScoreTable from "../components/ScoreTable";
 import "./../styles/views/Game.scss";
 
 function Game() {
@@ -17,7 +17,6 @@ function Game() {
   };
 
   const actionComparison = (playerAction, computerAction) => {
-    console.log("click");
     if (playerAction === computerAction) {
       setScores((previsousState) => [
         ...previsousState,
@@ -62,6 +61,7 @@ function Game() {
   return (
     <div className="view">
       <div className="view-game-play">
+        <h1>Chifoumi - A vous de jouer !</h1>
         {actions.current.map((action) => (
           <button
             key={action}
@@ -72,50 +72,7 @@ function Game() {
           </button>
         ))}
       </div>
-      <table className="view-score-table">
-        <thead className="view-score-table-head">
-          <tr>
-            <td>Score Joueur total</td>
-            <td>Score Joueur partie</td>
-            <td>Jeu du jouer</td>
-            <td>Jeu de l'ordinateur</td>
-            <td>Score Ordinateur partie</td>
-            <td>Score Ordinateur total</td>
-          </tr>
-        </thead>
-        <tbody className="view-score-table-body">
-          {scores.map((score, index) => (
-            <tr key={score.id} className="view-score-item">
-              <td>
-                {index === scores.length - 1 &&
-                  scores.reduce((acc, curr) => (acc += curr.playerScore), 0)}
-              </td>
-              <td>
-                {score.playerScore
-                  ? "gagné"
-                  : !score.computerScore
-                  ? "match nul"
-                  : "perdu"}
-              </td>
-              <td className="view-score-item-player">{score.playerAction}</td>
-              <td className="view-score-item-computer">
-                {score.computerAction}
-              </td>
-              <td>
-                {score.computerScore
-                  ? "gagné"
-                  : !score.playerScore
-                  ? "match nul"
-                  : "perdu"}
-              </td>
-              <td>
-                {index === scores.length - 1 &&
-                  scores.reduce((acc, curr) => (acc += curr.computerScore), 0)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ScoreTable scores={scores} />
     </div>
   );
 }

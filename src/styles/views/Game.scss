@@ -1,0 +1,22 @@
+.view {
+  width: 100vw;
+  height: 100vh;
+  padding: 24px;
+}
+
+.view-game-play {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  .view-game-play-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 6px;
+    padding: 0 16px;
+  }
+}

@@ -1,68 +1,50 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useState } from "react";
 import ScoreTable from "../components/ScoreTable";
 import "./../styles/views/Game.scss";
 
+const actions = ["pierre", "feuille", "ciseaux"];
+
 function Game() {
-  const actions = useRef(["pierre", "feuille", "ciseaux"]);
   const [scores, setScores] = useState([]);
 
-  const handlePlayerAction = (action) => {
-    const playerAction = action;
+  const handlePlayerAction = (playerAction) => {
     const randomIndex =
-      Math.round(Math.random() * 100) % actions.current.length;
-    const computerAction = actions.current[randomIndex];
+      Math.round(Math.random() * 100) % actions.length;
+    const computerAction = actions[randomIndex];
 
     actionComparison(playerAction, computerAction);
   };
 
   const actionComparison = (playerAction, computerAction) => {
+    const score = {
+      id: new Date().getTime(),
+      computerAction,
+      playerAction,
+    };
+
     if (playerAction === computerAction) {
-      setScores((previsousState) => [
-        ...previsousState,
-        {
-          id: new Date().getTime(),
-          computerAction,
-          playerAction,
-          computerScore: 0,
-          playerScore: 0,
-        },
-      ]);
+      score.computerScore = 0;
+      score.playerScore = 0;
     } else if (
       (playerAction === "pierre" && computerAction === "ciseaux") ||
       (playerAction === "feuille" && computerAction === "pierre") ||
       (playerAction === "ciseaux" && computerAction === "feuille")
     ) {
-      console.group("player win");
-      setScores((previsousState) => [
-        ...previsousState,
-        {
-          id: new Date().getTime(),
-          computerAction,
-          playerAction,
-          computerScore: 0,
-          playerScore: 1,
-        },
-      ]);
+      score.computerScore = 0;
+      score.playerScore = 1;
     } else {
-      setScores((previsousState) => [
-        ...previsousState,
-        {
-          id: new Date().getTime(),
-          computerAction,
-          playerAction,
-          computerScore: 1,
-          playerScore: 0,
-        },
-      ]);
+      score.computerScore = 1;
+      score.playerScore = 1;
     }
+    setScores((previsousState) => [...previsousState, score]);
   };
 
   return (
     <div className="view">
       <div className="view-game-play">
         <h1>Chifoumi - A vous de jouer !</h1>
-        {actions.current.map((action) => (
+        {actions.map((action) => (
           <button
             key={action}
             className="view-game-play-button"

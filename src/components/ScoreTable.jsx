@@ -54,7 +54,7 @@ function ScoreTable({ scores }) {
                 scores.reduce((acc, curr) => (acc += curr.computerScore), 0)}
             </td>
           </tr>
-        ))}
+        )).reverse()}
       </tbody>
     </table>
   );
